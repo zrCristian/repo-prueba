@@ -1,0 +1,88 @@
+---
+import Header from "../components/Header.astro";
+import Home from "../components/Home.astro";
+import Footer from "../components/Footer.astro";
+
+
+
+const skills = [
+  { name: "HTML", icon: "/images/skills-icons/html.svg" },
+  { name: "CSS", icon: "/images/skills-icons/css.svg" },
+  { name: "JavaScript", icon: "/images/skills-icons/javascript.svg" },
+  { name: "Git", icon: "/images/skills-icons/git.svg" },
+  { name: "GitHub", icon: "/images/skills-icons/github.svg" },
+  { name: "Tailwindcss", icon: "/images/skills-icons/tailwind.svg" },
+  { name: "React", icon: "/images/skills-icons/react.svg" },
+  { name: "Astro", icon: "/images/skills-icons/astro.svg" },
+  { name: "Node.js", icon: "/images/skills-icons/nodejs.svg" },
+  { name: "Express", icon: "/images/skills-icons/express.svg" },
+  { name: "MySQL", icon: "/images/skills-icons/mysql.svg" },
+];
+
+---
+<html lang="en" data-theme="light">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/images/logo.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+
+	<body class=" "> 
+
+
+		<Header></Header>
+		<Home></Home>
+
+
+		<!-- SKILLS -->
+		<section class="container w-11/12 m-auto my-16 border-[1px] border-solid  border-opacity-80 rounded-md ">
+			<h3 class="text-4xl text-white text-center my-6">Hablidades</h3>
+			<div class="flex flex-wrap justify-center gap-16 mb-6">
+				{
+					skills.map(skill => (
+						<article class="flex flex-col gap-1 items-center bounce">
+							<div class="bg-slate-100 rounded-full p-3 grid place-content-center">
+								<img class="text-white fill-white filter grayscale[50%] w-14 h-14"  src={skill.icon} alt={skill.name}>
+							</div>
+							<span class="text-white text-xl">{skill.name}</span>
+						</article>
+					))
+				}
+			</div>
+			
+		</section>
+
+	
+		<Footer></Footer>
+
+		
+	</body>
+</html>
+
+
+<script>
+	
+
+const preferenceColor  = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+const buttonColor = document.getElementById("buttonColor");
+
+const seleccionColor = (theme) => {
+	document.documentElement.setAttribute("data-theme", theme);
+	
+    localStorage.setItem("data-theme", theme);
+    
+}
+
+buttonColor.addEventListener("click", () => {
+    let switchTheme = localStorage.getItem("data-theme") === "dark" ? "light" : "dark";
+    seleccionColor(switchTheme);
+
+
+});
+
+
+seleccionColor(localStorage.getItem("data-theme") || preferenceColor)
+
+</script>
